@@ -1,0 +1,687 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Premium aesthetic color tokens */
+  --background: #0a0a0f;
+  --foreground: #f8fafc;
+  --card: rgba(255, 255, 255, 0.03);
+  --card-foreground: #f8fafc;
+  --popover: rgba(0, 0, 0, 0.9);
+  --popover-foreground: #f8fafc;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #1e1b4b;
+  --secondary-foreground: #f8fafc;
+  --muted: #374151;
+  --muted-foreground: #9ca3af;
+  --accent: #f59e0b;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(99, 102, 241, 0.2);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #6366f1;
+  --chart-1: #6366f1;
+  --chart-2: #f59e0b;
+  --chart-3: #10b981;
+  --chart-4: #ef4444;
+  --chart-5: #8b5cf6;
+  --radius: 1rem;
+  --sidebar: rgba(10, 10, 15, 0.95);
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f59e0b;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(99, 102, 248, 0.2);
+  --sidebar-ring: #6366f1;
+  --orbit-radius: 80px; /* Added for orbit-3d animation */
+}
+
+.dark {
+  /* Enhanced dark mode with deeper contrast */
+  --background: #030712;
+  --foreground: #f9fafb;
+  --card: rgba(255, 255, 255, 0.02);
+  --card-foreground: #f9fafb;
+  --popover: rgba(0, 0, 0, 0.95);
+  --popover-foreground: #f9fafb;
+  --primary: #818cf8;
+  --primary-foreground: #ffffff;
+  --secondary: #111827;
+  --secondary-foreground: #f9fafb;
+  --muted: #1f2937;
+  --muted-foreground: #6b7280;
+  --accent: #fbbf24;
+  --accent-foreground: #111827;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(129, 140, 248, 0.3);
+  --input: rgba(255, 255, 255, 0.03);
+  --ring: #818cf8;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-space-grotesk);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced animations with smoother, more premium effects */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(-8px) rotate(240deg);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(99, 102, 241, 0.2), inset 0 0 20px
+      rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(245, 158, 11, 0.3), inset 0 0 30px
+      rgba(99, 102, 241, 0.2);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    border-color: transparent;
+  }
+  51%,
+  100% {
+    border-color: #6366f1;
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg) translateX(var(--orbit-radius, 120px)) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg) translateX(var(--orbit-radius, 120px)) rotate(-360deg);
+  }
+}
+
+@keyframes pulse-neon {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(99, 102, 241, 0.5), 0 0 10px rgba(99, 102, 241, 0.3), 0 0 15px rgba(99, 102, 241, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.8), 0 0 20px rgba(245, 158, 11, 0.4), 0 0 30px rgba(99, 102, 241, 0.3);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Added advanced 3D orbit animations and gradient effects for the developer universe theme */
+@keyframes orbit-3d {
+  from {
+    transform: rotateY(0deg) translateX(var(--orbit-radius, 80px)) rotateY(0deg) rotateX(0deg);
+  }
+  to {
+    transform: rotateY(360deg) translateX(var(--orbit-radius, 80px)) rotateY(-360deg) rotateX(360deg);
+  }
+}
+
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes hologram-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes particle-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100px, -100px, 50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes constellation-connect {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+  100% {
+    stroke-dasharray: 100 0;
+  }
+}
+
+/* Adding advanced 3D skills matrix animations and effects */
+@keyframes orbit-slow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes skill-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+  }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateY(-100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes energy-flow {
+  0% {
+    stroke-dasharray: 0 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: -50;
+  }
+  100% {
+    stroke-dasharray: 200 0;
+    stroke-dashoffset: -200;
+  }
+}
+
+/* Adding 3D constellation specific animations for floating skill orbs */
+@keyframes constellation-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotateX(5deg) rotateY(120deg);
+  }
+  66% {
+    transform: translateY(-10px) rotateX(-3deg) rotateY(240deg);
+  }
+}
+
+@keyframes skill-orb-hover {
+  0% {
+    transform: scale(1) rotateY(0deg);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    transform: scale(1.1) rotateY(180deg);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 0 60px rgba(245, 158, 11, 0.3);
+  }
+  100% {
+    transform: scale(1) rotateY(360deg);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+}
+
+@keyframes connection-pulse {
+  0%,
+  100% {
+    stroke-width: 1;
+    stroke-opacity: 0.3;
+  }
+  50% {
+    stroke-width: 2;
+    stroke-opacity: 0.8;
+  }
+}
+
+@keyframes orb-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Adding project orbit animations for 3D orbiting gallery */
+@keyframes project-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius, 200px)) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius, 200px)) rotate(-360deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+.animate-typewriter {
+  animation: typewriter 3s steps(40) 1s forwards;
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+.animate-orbit {
+  animation: orbit 20s linear infinite;
+}
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+.animate-slide-down {
+  animation: slide-down 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Added new animation classes for 3D effects */
+.animate-orbit-3d {
+  animation: orbit-3d 25s linear infinite;
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-matrix-rain {
+  animation: matrix-rain 8s linear infinite;
+}
+
+.animate-hologram-scan {
+  animation: hologram-scan 2s ease-in-out infinite;
+}
+
+.animate-particle-drift {
+  animation: particle-drift 12s ease-out infinite;
+}
+
+.animate-constellation-connect {
+  animation: constellation-connect 2s ease-in-out forwards;
+}
+
+.animate-orbit-slow {
+  animation: orbit-slow 30s linear infinite;
+}
+
+.animate-scan-line {
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+.animate-skill-pulse {
+  animation: skill-pulse 2s ease-in-out infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 6s linear infinite;
+}
+
+.animate-energy-flow {
+  animation: energy-flow 2s ease-in-out infinite;
+}
+
+/* Adding animation classes for 3D constellation effects */
+.animate-constellation-float {
+  animation: constellation-float 8s ease-in-out infinite;
+}
+
+.animate-skill-orb-hover {
+  animation: skill-orb-hover 3s ease-in-out infinite;
+}
+
+.animate-connection-pulse {
+  animation: connection-pulse 2s ease-in-out infinite;
+}
+
+.animate-orb-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: orb-shimmer 2s infinite;
+}
+
+/* Adding project-specific animation classes */
+.animate-project-orbit {
+  animation: project-orbit 30s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Enhanced 3D perspective and transform utilities */
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.rotate-x-6 {
+  transform: rotateX(6deg);
+}
+
+.rotate-x-12 {
+  transform: rotateX(12deg);
+}
+
+.rotate-y-12 {
+  transform: rotateY(12deg);
+}
+
+.rotate-y-24 {
+  transform: rotateY(24deg);
+}
+
+.translate-z-5 {
+  transform: translateZ(5px);
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+/* Holographic and glassmorphism effects */
+.holographic {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(245, 158, 11, 0.05) 50%,
+    rgba(99, 102, 241, 0.1) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: hologram-scan 3s ease-in-out infinite;
+}
+
+.holographic-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(245, 158, 11, 0.05) 25%,
+    rgba(16, 185, 129, 0.05) 50%,
+    rgba(245, 158, 11, 0.05) 75%,
+    rgba(99, 102, 241, 0.1) 100%
+  );
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: scan-line 4s ease-in-out infinite;
+}
+
+/* Skills matrix specific effects */
+.skills-orb {
+  transform-style: preserve-3d;
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.skills-orb:hover {
+  transform: scale(1.1) rotateY(12deg) translateZ(20px);
+}
+
+/* Enhanced glow effects for premium look */
+.glow-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.2), 0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 0 40px rgba(245, 158, 11, 0.2), 0 0 60px rgba(245, 158, 11, 0.1);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3), 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+/* Enhanced 3D constellation layout utilities */
+.constellation-container {
+  transform-style: preserve-3d;
+  perspective: 1500px;
+}
+
+.skill-orb-3d {
+  transform-style: preserve-3d;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.skill-orb-3d:hover {
+  transform: scale(1.25) rotateY(15deg) rotateX(10deg) translateZ(30px);
+}
+
+.connection-line {
+  stroke: rgba(99, 102, 241, 0.4);
+  stroke-width: 1;
+  fill: none;
+  filter: drop-shadow(0 0 3px rgba(99, 102, 241, 0.3));
+}
+
+/* Premium glow effects for skill orbs */
+.orb-glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2), inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.orb-glow-green {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2), inset 0 0 20px rgba(34, 197, 94, 0.1);
+}
+
+.orb-glow-purple {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.4), 0 0 40px rgba(147, 51, 234, 0.2), inset 0 0 20px rgba(147, 51, 234, 0.1);
+}
+
+.orb-glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 0 40px rgba(245, 158, 11, 0.2), inset 0 0 20px rgba(245, 158, 11, 0.1);
+}
